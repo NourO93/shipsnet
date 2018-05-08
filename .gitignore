@@ -1,0 +1,5 @@
+/shipsnet_data
+*.jpg
+*.zip
+*.7z
+model.pkl
