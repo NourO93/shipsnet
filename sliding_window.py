@@ -14,11 +14,12 @@ args = vars(ap.parse_args())
 # load the image and define the window width and height
 image = cv2.imread(args["image"])
 (winW, winH) = (80, 80)
+print(image.shape)
 
 # loop over the image pyramid
 for resized in pyramid(image, scale=1.5):
 	# loop over the sliding window for each layer of the pyramid
-	for (x, y, window) in sliding_window(resized, stepSize=2, windowSize=(winW, winH)):
+	for (x, y, window) in sliding_window(resized, stepSize=12, windowSize=(winW, winH)):
 		# if the window does not meet our desired window size, ignore it
 		if window.shape[0] != winH or window.shape[1] != winW:
 			continue
@@ -32,4 +33,6 @@ for resized in pyramid(image, scale=1.5):
 		cv2.rectangle(clone, (x, y), (x + winW, y + winH), (0, 255, 0), 2)
 		cv2.imshow("Window", clone)
 		cv2.waitKey(1)
-		time.sleep(0.025)
+		time.sleep(0.0002)
+
+#python sliding_window.py --image /shipsnet_data/scenes/lb_1.jpg
