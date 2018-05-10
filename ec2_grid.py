@@ -81,23 +81,11 @@ y_vect = np.ravel(image_tag)
 
 
 
-xtrain, xtest, ytrain, ytest = train_test_split(x_vect, y_vect, test_size=0.9, random_state = 1234, stratify = y_vect, shuffle = True)
+xtrain, xtest, ytrain, ytest = train_test_split(x_vect, y_vect, test_size=0.2, random_state = 1234, stratify = y_vect, shuffle = True)
 
 print(len(x_vect),len(y_vect))
 
-f = open('test.txt','w')
 
-
-svc = SVC(kernel = 'poly',degree = 3, probability=True)
-start_time = time.time()
-clf = svc.fit(xtrain, ytrain)
-train_acc=clf.score(xtrain, ytrain)
-with open('test.pkl', 'wb') as picklefile:
-    pickle.dump(clf, picklefile)
-
-# test_acc=clf.score(xtest,ytest)
-print("Training Data Accuracy: %0.2f" %(train_acc))
-# print("Test Data Accuracy:     %0.2f" %(test_acc))
 
 # define hyperparameters
 # tuned_parameters = [{'kernel': ['poly'], 'degree':[3]}]
