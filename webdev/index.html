@@ -4,30 +4,53 @@
 
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   <link href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.css" />
-  <!--Bootstrap css-->
+  <!-- <link rel="stylesheet" href="leaflet-areaselect/src/leaflet-areaselect.css" /> -->
+  <!-- Latest compiled and minified CSS -->
+  <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+ <link href="custom.css" rel="stylesheet">
 
-	<style>
-		html, body, #map { width:100%; height:100%; margin:0; padding:0; }
-	</style>
 
 </head>
 
 <body>
 
-  <div id="map" class="map"></div>
+  <div class="header">
+    <h1> Object Detection in Satellite Imagery</h1>
+  </div>
+
+  <div class= 'col-md-4 center_div'>
+  <a id='output' class="btn btn-primary btn-link mb-2 center_div"  >Output</a>
+  </div>
+
+
+
+  <div class= 'map-container'>
+  <div  id='map'></div>
+  </div>
+
+  <div class= 'cutout-container'>
+  <div id='images'></div>
+  </div>
+
+
+
+</body>
+
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/leaflet.js"></script>
-
   <script src="https://d3js.org/d3.v4.min.js"></script>
+  <script src="leaflet-areaselect/src/leaflet-areaselect.js"></script>
+  <script src='leaflet-image.js'></script>
+  <script>L_PREFER_CANVAS = true;</script>
+
+
 
   <script>
 
-
-    //basemap
+    //create map and center
 
     var options = {
     center: [37.741, -122.583], // lat/lon values
@@ -36,6 +59,8 @@
 
     var map = L.map('map', options);
 
+    //create basemap
+
     var tiles = L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
         attribution: '© <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="http://cartodb.com/attributions">CartoDB</a>',
         subdomains: 'abcd',
@@ -43,14 +68,51 @@
     }).addTo(map);
 
 
+    //add planet mosaic tiles
     var planet_layer = L.tileLayer('https://tiles.planet.com/basemaps/v1/planet-tiles/global_monthly_2016_04_mosaic/gmap/{z}/{x}/{y}.png?api_key=d7e6156e45014df093e4c7db2978ba55',
     {
       maxZoom: 30
     })
     map.addLayer(planet_layer);
 
+    document.getElementById('output').addEventListener('click', function() {
+  	leafletImage(map, doImage);
+    });
 
 
+    function doImage(err, canvas) {
+        var img = document.createElement('img');
+        var dimensions = map.getSize();
+        img.width = dimensions.x;
+        img.height = dimensions.y;
+        img.src = canvas.toDataURL();
+        document.getElementById('images').innerHTML = '';
+        document.getElementById('images').appendChild(img);
+        var ctx = canvas.getContext('2d')
+        var imageData = ctx.getImageData(0, 0, 10, 10);
+        console.log(imageData.data);
+
+    	//sample3.innerHTML = '';
+       // sample3.appendChild(img);
+    }
+
+
+
+
+    //
+    // var areaSelect = L.areaSelect({width:200, height:300});
+    // areaSelect.addTo(map);
+    //
+    // // Read the bouding box
+    // var bounds = areaSelect.getBounds();
+    //
+    // // Get a callback when the bounds change
+    // areaSelect.on("change", function() {
+    //     // console.log("Bounds:", this.getBounds());
+    // });
+    //
+    // // Set the dimensions of the box
+    // areaSelect.setDimensions({width: 500, height: 500})
 
 
 
