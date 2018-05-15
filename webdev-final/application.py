@@ -89,15 +89,13 @@ def simple():
     try:
         data = request.form
         bit64 = data['data']
+        tag = data['tag']
         image_data = re.sub('^data:image/png;base64,', '', bit64)
         im = Image.open(BytesIO(base64.b64decode(image_data)))
         
 
         if im.mode == 'RGBA':
             im = im.convert('RGB')
-        #     h = im.size[0]
-        #     w = im.size[1]
-        #     im = im.resize((3*h,3*w))
             im = np.asarray(im)
 
     except KeyError:
@@ -113,15 +111,16 @@ def simple():
     for i in result[1]:
         rect = patches.Rectangle(i,80,80,linewidth=4,edgecolor='r',facecolor='none')
         ax.add_patch(rect)
+    plt.axis('off')
 
-    plt.savefig('buf-save', format='png')
+    plt.savefig('buf-save'+tag+'.png',transparent=True, format='png')
     
     canvas=FigureCanvas(fig)
     png_output =BytesIO()
     canvas.print_png(png_output)
     response=make_response(png_output.getvalue())
     
-    response.headers['Content-Type'] = 'image/png'
+    # response.headers['Content-Type'] = 'image/png'
     return response
 
 

@@ -17,24 +17,45 @@
 <body>
 
   <div class="header">
-    <h1> Object Detectdion in Satellite Imagery</h1>
+    <h1> Object Detection in Satellite Imagery</h1>
   </div>
 
-  <div class= 'col-md-4 center_div'>
-  <a id='output' class="btn btn-primary btn-link mb-2 center_div"  >Output</a>
+  <div class="row">
+    <div class=" text-splash">
+
+    <p> Satellite imagery provides unique insights into various markets, including agriculture, defense and intelligence, energy, and finance. New commercial imagery providers, such as Planet and BlackSky, are using constellations of small satellites to exponentially increase the amount of images of the earth captured every day.
+      This flood of new imagery is outgrowing the ability for organizations to manually look at each image that gets captured, and there is a need for machine learning and computer vision algorithms to help automate the analysis process.
+    </p>
+    <p> The aim of this dataset is to help address the difficult task of detecting the location of large ships in satellite images. Automating this process can be applied to many issues including monitoring port activity levels and supply chain analysis.
+      Continusouly updates will be made to this dataset as new Planet imagery released. Current images were collected as late as September 2017.
+    </p>
+
+    </div>
   </div>
 
-  <img src="{{ response_image }}" alt="Response Image">
 
 
+  <div class = 'row'>
+    <div class= 'col-md-6 text-center'>
+      <a id='output' class="btn btn-primary btn-link mb-2 "  >Run Model</a>
+      <div id='cutout' >
+      <img  id = 'badge' src="../buf-save.png" alt="Model Results">
 
-  <div class= 'map-container'>
-  <div  id='map'></div>
+
+      </div>
+    </div>
+
+    <div class= 'col-md-6'>
+      <div id = 'map'>
+      </div>
+    </div>
+
   </div>
 
-  <div class= 'cutout-container'>
-  <div id='images'></div>
-  </div>
+
+
+
+
 
 
 
@@ -70,37 +91,82 @@
 
 
     //add planet mosaic tiles
-    var planet_layer = L.tileLayer('https://tiles.planet.com/basemaps/v1/planet-tiles/global_monthly_2016_04_mosaic/gmap/{z}/{x}/{y}.png?api_key=d7e6156e45014df093e4c7db2978ba55',
+    var planet_layer = L.tileLayer('https://tiles.planet.com/basemaps/v1/planet-tiles/global_monthly_2016_05_mosaic/gmap/{z}/{x}/{y}.png?api_key=d7e6156e45014df093e4c7db2978ba55',
     {
       maxZoom: 30
     })
     map.addLayer(planet_layer);
 
-    document.getElementById('output').addEventListener('click', function() {
-  	leafletImage(map, doImage);
+    // document.getElementById('output').addEventListener('click', function(e) {
+    //   leafletImage(map, doImage);
+    //   e.preventDefault();
+    // });
+    //
+    //
+    // function doImage(err, canvas) {
+    //     var img = document.createElement('img');
+    //     var dimensions = map.getSize();
+    //     img.width = dimensions.x;
+    //     img.height = dimensions.y;
+    //     img.src = canvas.toDataURL();
+    //     var img_data = img.src
+    //     // console.log(img.src )
+    //
+    //
+    //
+    //     $.ajax({
+		// 			url: 'http://127.0.0.1:5000/predict',
+		// 			data: {'data':img_data},
+		// 			method: 'POST',
+		// 			success: function() {
+		// 				console.log('got here')
+		// 			}
+		// 		})
+
+    var tag = 1
+
+    $('#output').on('click', function(e){
+       e.preventDefault();
+
+       tag+=1
+
+       leafletImage(map, doImage)
+
+       var img_data
+       function doImage(err, canvas) {
+           var img = document.createElement('img');
+           var dimensions = map.getSize();
+           img.width = dimensions.x;
+           img.height = dimensions.y;
+           img.src = canvas.toDataURL();
+           img_data = img.src
+
+
+        var image = 'buf-save'+tag+'.png'
+        $.ajax({
+          type: 'post',
+          url: 'http://127.0.0.1:5000/predict',
+          data: {'data':img_data, 'tag':tag},
+
+          success: function() {
+            
+            function changeimg(ele) {
+              image_path = '../'+image
+              console.log(image_path)
+              ele.src=image_path;
+            }
+            var div = document.getElementById('badge');
+            changeimg(div)
+          }
+
+        })
+
+      }
     });
 
 
-    var img_data
-    function doImage(err, canvas) {
-        var img = document.createElement('img');
-        var dimensions = map.getSize();
-        img.width = dimensions.x;
-        img.height = dimensions.y;
-        img.src = canvas.toDataURL();
-        img_data = img.src
-        // console.log(img.src )
 
 
-
-        $.ajax({
-					url: 'http://127.0.0.1:5000/predict',
-					data: {'data':img_data},
-					method: 'POST',
-					success: function() {
-						console.log('got here')
-					}
-				});
 
         // document.getElementById('images').innerHTML = '';
         // document.getElementById('images').appendChild(img);
@@ -110,7 +176,7 @@
 
     	//sample3.innerHTML = '';
        // sample3.appendChild(img);
-    }
+
 
 
 

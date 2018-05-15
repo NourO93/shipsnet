@@ -71,17 +71,16 @@ def plot_found(cnn_coords,image):
 	strIO.seek(0)
 	return strIO
 
-@app.route('/predict', methods=["GET"])
+@app.route('/predict', methods=["POST"])
 def predict():
     # initialize the data dictionary that will be returned from the
     # view
     data = {"success": []}
 
     # ensure an image was properly uploaded to our endpoint
-    # path = flask.request.files["image"]
-    path = 'test.png'
+    path = flask.request.files["image"]
     image = mpimg.imread(path)
-    result = scan_image(model,image,12,.7)
+    result = scan_image(model,image,12,.9)
     plot_found(result[1],image)
     data['success'].append(1)
     return data

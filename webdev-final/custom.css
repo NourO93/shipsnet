@@ -1,5 +1,7 @@
 body {
   font-family: Lato, sans-serif;
+  margin-left: 30px;
+  margin-right: 30px
 }
 
 .header {
@@ -8,48 +10,65 @@ body {
 
 }
 
-.header h1 {
-  margin-top: 20px;
-  font-size: 4rem
+.text-splash{
+  margin-left: 5%;
+  margin-right:5%;
+  margin-bottom: 40px;
 }
 
-.center_div{
-    margin: 0 auto;
-    margin-bottom: 40px;
-    position: relative;
-    width:80% /* value of your choice which suits your alignment */
+.header h1 {
+  margin-top: 20px;
+  font-size: 4rem;
+  padding-bottom: 20px;
+  padding-top: 20px
 }
+
 
 .map-container {
   width: 60%;
   height: 500;
-  float:left;
-  text-align: center
+  float:right;
+  text-align: center;
+
 
 }
 
-.cutout-container {
+.col-md-12{
+  margin-bottom: 40px
+}
+
+
+.info-container {
   width: 40%;
   height: 500;
-  float:left;
+  margin-left: 5%;
   text-align: center
 
 }
 
+#cutout{
+  margin-left: -20px
+}
+
+
 #map {
-	height: 700px;
-  width: 90%;
+	height: 500;
   margin-bottom: 30px;
-  margin-right: auto;
-  margin-left: auto
+  margin-right: 10%;
+  margin-left: 5%;
 
   }
 
+
 .btn-link{
-  width: 100%;
+  width: 369;
+  height: 60px;
   color: #fff;
-  background-color: #ff9506;
-  border-color: #ff9506;
+  font-size: 2rem;
+  text-align: center;
+  line-height: 50px;
+  background-color: #174D3C;
+  border-color: #174D3C;
 
 }
 
@@ -60,7 +79,7 @@ body {
 }
 
 
-.flat-slider.ui-corner-all,
+/* .flat-slider.ui-corner-all,
 .flat-slider .ui-corner-all {
   border-radius: 0;
 }
@@ -167,4 +186,4 @@ body {
   html, body, #quakes_map {
       height: 100%;
       width: 100%;
-  }
+  } */
