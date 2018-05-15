@@ -3,3 +3,8 @@ source activate tensorflow_p36
 jupyter notebook --no-browser --port=8888
 
 #navigate to 127.0.0.1:9999
+
+
+scp ec2_grid.py gpuaws:~
+
+scp -i /Users/mayamidzik/.ssh/aws_key.pem gpuaws:/home/ubuntu/CNN-final/Cnn-iterations-ec22.ipynb .
