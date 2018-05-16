@@ -1,5 +1,7 @@
 body {
-  font-family: Lato, sans-serif;
+  font-family: Roboto, sans-serif;
+  margin-left: 20px;
+  margin-right: 20px
 }
 
 .header {
@@ -8,59 +10,87 @@ body {
 
 }
 
+.text-splash{
+  margin-left: 5%;
+  margin-right:10%;
+  margin-bottom: 60px;
+}
+
 .header h1 {
   margin-top: 20px;
-  font-size: 4rem
+  font-size: 4rem;
+  padding-top: 20px
 }
 
-.center_div{
-    margin: 0 auto;
-    margin-bottom: 40px;
-    position: relative;
-    width:80% /* value of your choice which suits your alignment */
-}
 
 .map-container {
-  width: 48%;
+  width: 60%;
   height: 500;
-  float:left;
+  float:right;
+  text-align: center;
+
+
+}
+
+.col-md-12{
+  margin-bottom: 40px
+}
+
+
+.info-container {
+  width: 40%;
+  height: 500;
+  margin-left: 5%;
   text-align: center
 
 }
 
-.cutout-container {
-  width: 48%;
-  height: 500;
-  float:left;
-  text-align: center
+/* #cutout{
+  margin-right: 20px
+} */
 
+#badge{
+   margin-left: -100;
+   margin-bottom: 100px;
+   margin-right: -100
+}
+
+#images{
+  margin-left: 60px
 }
 
 #map {
-	height: 700px;
-  width: 90%;
-  margin-bottom: 30px;
-  margin-right: auto;
-  margin-left: auto
+	height: 500;
+  margin-bottom: 30px
 
   }
 
+#step{
+  margin-left: 5%
+}
+
+
 .btn-link{
-  width: 100%;
+  width: 50%;;
+  height: 60px;
   color: #fff;
-  background-color: #ff9506;
-  border-color: #ff9506;
+  font-size: 2rem;
+  text-align: center;
+  line-height: 50px;
+  background-color: #153C2E;
+  border-color: #153C2E;
 
 }
 
 .btn-link:hover {
   color: #fff;
-  background-color: #c66005;
-  border-color: #c66005;
+  text-decoration: none;
+  background-color: #666666ff;
+  border-color: #666666ff;
 }
 
 
-.flat-slider.ui-corner-all,
+/* .flat-slider.ui-corner-all,
 .flat-slider .ui-corner-all {
   border-radius: 0;
 }
@@ -167,4 +197,4 @@ body {
   html, body, #quakes_map {
       height: 100%;
       width: 100%;
-  }
+  } */
