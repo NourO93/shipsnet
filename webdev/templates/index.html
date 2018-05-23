@@ -65,8 +65,6 @@
 
 
 
-
-
 </body>
 
 
@@ -104,11 +102,11 @@
 
 
     //add planet mosaic tiles
-    var planet_layer_jan = L.tileLayer('https://tiles.planet.com/basemaps/v1/planet-tiles/global_monthly_2016_04_mosaic/gmap/{z}/{x}/{y}.png?api_key=d7e6156e45014df093e4c7db2978ba55',
+    var planet_layer_jan = L.tileLayer('https://tiles.planet.com/basemaps/v1/planet-tiles/global_monthly_2017_01_mosaic/gmap/{z}/{x}/{y}.png?api_key=d7e6156e45014df093e4c7db2978ba55',
     {
       maxZoom: 30
     })
-    var planet_layer_feb = L.tileLayer('https://tiles.planet.com/basemaps/v1/planet-tiles/global_monthly_2016_09_mosaic/gmap/{z}/{x}/{y}.png?api_key=d7e6156e45014df093e4c7db2978ba55',
+    var planet_layer_feb = L.tileLayer('https://tiles.planet.com/basemaps/v1/planet-tiles/global_monthly_2017_02_mosaic/gmap/{z}/{x}/{y}.png?api_key=d7e6156e45014df093e4c7db2978ba55',
     {
       maxZoom: 30
     })
@@ -177,7 +175,6 @@
             function changeimg(ele) {
               //load new image from model into image space
               image_path = '../images/'+image
-              console.log(image_path)
               ele.src=image_path;
             }
             var div = document.getElementById('badge');
