@@ -32,7 +32,7 @@ Best performing model (logistic regression) tested with sliding window on comple
 ### Step 4
 CNN model (using Keras) trained and tested on thumbnails, as well as full image with sliding window.
 
-Note: all CNN models were trained on amazon EC2 instance w/ GPU- they will take a very long time to run on a local machine w/ CPU.
+Note: all CNN models were trained on amazon EC2 instance w/ GPU- they will take a very long time to run on a local machine w/ CPU. 
 
 Final model performed with:
 
